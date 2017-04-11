@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>{{ storename }}</title>
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<script type="text/javascript" src="/source/valention/js/jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="/source/valention/css/wx_shop.css">
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+
+		body{
+			font-size: 12px;
+			line-height: 16px;
+			color: #2a2a2a;
+
+			-webkit-font-smoothing: antialiased; 
+		    -webkit-tap-highlight-color: rgba(0,0,0,0);
+		    -webkit-tap-highlight: rgba(0,0,0,0);
+		    -webkit-text-size-adjust: none;
+		    overflow: -moz-scrollbars-vertical;
+		}
+		
+		a{
+			color: #2a2a2a;
+			text-decoration: none;
+		}
+
+		.header{
+			width: 100%;
+			padding: 18px 0;
+			text-align: center;
+		}
+
+		.info{
+			width: 100%;
+			margin: 15px 0;
+			display: inline-block;
+		}
+
+		.info h1{
+			font-size: 22px;
+			width: 100%;
+			padding: 9px 0;
+			display: inline-block;
+		}
+
+		.info p{
+			width: 100%;
+			padding: 2px 0;
+			display: inline-block;
+		}
+
+		.info em{
+			font-style: normal;
+		}
+
+		.map{
+			border: 5px #fff solid;
+			border-radius: 3px;
+			margin: 0 0 30px 0;
+		}
+
+		/*.info em{
+			width: 24%;
+			font-style: normal;
+			float: left;
+			display: inline-block;
+		}
+
+		.info span{
+			width: 75%;
+			float: right;
+			display: inline-block;
+		}*/
+	</style>
+<body>
+<div class="header">
+	<img src="/vfile/img/logo.png" width="30%">
+</div>
+<div class="content">
+	{% if storelog is defined and storelog %}
+		<p><img src="{{ storelog }}" width="100%"></p>
+	{% endif %}
+  			<!-- <div id="map-canvas"></div> -->
+	<div class="info">
+		<h1>{{ storename }}</h1>
+		
+		{% if brandtype is defined and brandtype %}
+		<p>
+		    <em>产品类型：</em>
+		    <span>{{ brandtype }}</span>
+		</p>
+		{% endif %}
+		
+		{% if address is defined and address %}
+		<p>
+	        <em>地址：</em>
+	        <span>{{ address|nl2br }}</span>
+	    </p>
+		{% endif %}
+
+		{% if openhours is defined and openhours %}
+		<p>
+	        <em>营业时间：</em>
+	        <span>{{ openhours|nl2br }}</span>
+	    </p>
+		{% endif %}
+
+		{% if phone is defined and phone %}
+		<p>
+		    <em>电话：</em>
+		    <span><a href="tel:{{ phone }}">{{ phone }}</a></span>
+		</p>
+		{% endif %}
+	</div>
+
+    {% if storelog is defined and storelog %}
+		<img src="{{ storelog }}" width="100%" class="map">
+    {% endif %}
+
+	{% if storemap is defined and storemap %}
+		<img src="{{ storemap }}" width="100%" class="map">
+	{% endif %}
+
+		<!-- <div id="foot">
+			<p></p>
+		</div>
+		<input type="hidden" id="x" value="{{ lat }}">
+		<input type="hidden" id="y" value="{{ lng }}">
+		<input type="hidden" id="mapTitle" value="">
+		<input type="hidden" id="mapContent" value=""> -->
+</div>
+	<!-- <script id="txt-title" type="txt/text">Valentino北京王府井in88精品店</script> -->
+<!-- 	<script id="txt-sourceurl" type="txt/text"></script>
+	<script type="text/javascript">
+		function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null)
+				return unescape(r[2]);
+			return null;
+		}
+		function generateBaiduMap() {
+			$("#map-canvas").after('<p><a id="baidu-map" class="btn"></a>仅限中国大陆地区</p>');
+			var _ori_x = getUrlParam('orix');
+			var _ori_y = getUrlParam('oriy');
+			var _x = $('#x').val();
+			var _y = $('#y').val();
+			$("#baidu-map").attr('href','http://api.map.baidu.com/direction?origin=latlng:'+_ori_x+','+_ori_y+'|name:起点&destination=latlng:'+_x+','+_y+'|name:终点&mode=driving&region=1&output=html&src=yourCompanyName|yourAppName').html('到这里去');
+		}
+		function generateBaiduMapForShop() {
+			$("#map-canvas").after('<p><img id="marker" src="/images/maps_marker.png"/><a id="baidu-map" class="btn"></a>仅限中国大陆地区</p>');
+			var _ori_x = getUrlParam('orix');
+			var _ori_y = getUrlParam('oriy');
+			var _x = $('#x').val();
+			var _y = $('#y').val();
+			$("#baidu-map").attr('href','http://api.map.baidu.com/marker?location='+_x+','+_y+'&title=店铺位置&content=店铺位置&output=html').html('到这里去');
+		}
+		var _ori_x = getUrlParam('orix');
+		var _ori_y = getUrlParam('oriy');
+		var _x = $('#x').val();
+		var _y = $('#y').val();
+		var mapTitle = $('#mapTitle').val();
+		var mapContent = $('#mapContent').val();
+		if(_ori_x !=null&&_ori_y!=null){
+			if (_x != '' && _y != '') {
+			console.log(_ori_x+' '+_ori_y+' '+_x+' '+_y);
+				var map = new BMap.Map("map-canvas");
+				map.centerAndZoom(new BMap.Point(_ori_y, _ori_x),14);
+				var p1 = new BMap.Point(_ori_y,_ori_x);
+				var p2 = new BMap.Point(_y,_x);
+				var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+				driving.search(p1, p2);
+				generateBaiduMap();
+			} else {
+				$('#map-canvas').remove();
+			}
+		}else{
+			var map = new BMap.Map("map-canvas");
+			map.centerAndZoom(new BMap.Point(_y, _x),14);
+			var marker1 = new BMap.Marker(new BMap.Point(_y, _x));
+			map.addOverlay(marker1);
+			var infoWindow1 = new BMap.InfoWindow(mapTitle);
+			marker1.addEventListener("click", function(){this.openInfoWindow(infoWindow1);});
+			generateBaiduMapForShop();
+		}
+</script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Z5FOXZbjH3AEIukiiRTtD7Xy"></script> -->
+
+	</body>
+</html>
+
+

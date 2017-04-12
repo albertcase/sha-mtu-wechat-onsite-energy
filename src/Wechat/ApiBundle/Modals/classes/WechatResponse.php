@@ -24,7 +24,7 @@ class WechatResponse{
     if($postStr){
       $this->postStr = $postStr;
     }else{
-      $this->postStr = isset($GLOBALS["HTTP_RAW_POST_DATA"])?$GLOBALS["HTTP_RAW_POST_DATA"]:'';
+      $this->postStr = isset($GLOBALS["HTTP_RAW_POST_DATA"])?$GLOBALS["HTTP_RAW_POST_DATA"]:file_get_contents('php://input', 'r');;
     }
     $this->postObj = simplexml_load_string($this->postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
     $this->msgType = isset($this->postObj->MsgType)?strtolower($this->postObj->MsgType):'';

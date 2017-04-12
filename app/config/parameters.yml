@@ -21,9 +21,9 @@ parameters:
     redis_prostr: mtu_online:
 
     # wechat config
-    wechat_Token: same_wechat_samesamechina
-    wechat_AppID: wxdffb071f687633b8
-    wechat_AppSecret: 8395e578d5d08499df2bbd6750a2f43e
+    wechat_Token: mtu_wechat_onsite
+    wechat_AppID: wxdf4aebd8ae41c25d
+    wechat_AppSecret: 3c611aba2636aa69ddefcd1d4464d76e
 
     bundles:
       - wechat_api

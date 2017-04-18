@@ -16,26 +16,26 @@ var tinypng = require('gulp-tinypng-compress');
 var path = {
     all:[
         './template/*.html',
-        './src/assets/css/*.css',
-        './src/assets/js/*.js',
-        './src/assets/js/lib/*.js'
+        './assets/css/*.css',
+        './assets/js/*.js',
+        './assets/js/lib/*.js'
     ],
     template:['./template/*.html'],
-    css:['./src/assets/css/*.css'],
+    css:['./assets/css/*.css'],
     js:[
-        './src/assets/js/lib/zepto.min.js',
-        //'./src/assets/js/lib/pre-loader.js',
-        //'./src/assets/js/lib/reqAnimate.js',
-        //'./src/assets/js/rem.js',
-        //'./src/assets/js/common.js',
-        //'./src/assets/js/wxshare.js',
-        //'./src/assets/js/api.js',
-        //'./src/assets/js/home.js'
+        './assets/js/lib/zepto.min.js',
+        //'./assets/js/lib/pre-loader.js',
+        //'./assets/js/lib/reqAnimate.js',
+        //'./assets/js/rem.js',
+        //'./assets/js/common.js',
+        //'./assets/js/wxshare.js',
+        //'./assets/js/api.js',
+        //'./assets/js/home.js'
     ],
     images:[
-        './src/assets/*.{png,jpg,jpeg}',
-        './src/assets/*/*.{png,jpg,jpeg}',
-        './src/assets/*/*/*.{png,jpg,jpeg}'
+        './assets/*.{png,jpg,jpeg}',
+        './assets/*/*.{png,jpg,jpeg}',
+        './assets/*/*/*.{png,jpg,jpeg}'
     ],
 };
 // Browser-sync
@@ -64,17 +64,17 @@ gulp.task('css',['clean'],function () {
         // 2. 压缩文件
         .pipe(minify())
         // 3. 另存为压缩文件
-        .pipe(gulp.dest('./src/dist/css'));
+        .pipe(gulp.dest('./dist/css'));
 });
 
 // Concatenate & Minify
 gulp.task('scripts_welcome',['clean'], function() {
     return gulp.src(path.js)
         .pipe(concat('all.js'))
-        .pipe(gulp.dest('./src/dist'))
+        .pipe(gulp.dest('./dist'))
         .pipe(rename('all.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('./src/dist/js'));
+        .pipe(gulp.dest('./dist/js'));
 });
 
 // Concatenate & Minify
@@ -82,12 +82,12 @@ gulp.task("tinypng", function(){
     gulp.src(path.images)
         .pipe(tinypng({
             key: '-ID8TBnbSlRuMCc_mMagta65Q7IDyaQ-',
-            sigFile: './src/.tinypng-sigs',
+            sigFile: './.tinypng-sigs',
             log: true
         })).on('error', function(err) {
             console.error(err.message);
         })
-        .pipe(gulp.dest('./src/dist/'));
+        .pipe(gulp.dest('./dist/'));
 });
 
 // Watch Files For Changes

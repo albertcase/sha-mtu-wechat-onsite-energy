@@ -3,11 +3,11 @@
   background: #fff;
   width: 100%;
   text-align: right;
-  padding-right: 0.6rem;
+  padding: 0.44rem 0.6rem 0.3rem 0;
   box-sizing: border-box;
   img{
     display: inline-block;
-    @include size(3.33rem,1.53rem);
+    @include size(3.03rem,0.8rem);
   }
 }
 .page-title{
